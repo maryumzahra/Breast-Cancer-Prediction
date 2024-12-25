@@ -31,7 +31,6 @@ POSSIBLE_QUESTIONS = """
     - How can I prepare for a mammogram?
     - How can I reduce my risk of breast cancer?
 """
-
 USER_GUIDE_TEXT = """
     **Breast Cancer Prediction Tool - User Guide**
 
@@ -48,11 +47,11 @@ USER_GUIDE_TEXT = """
 CHATBOT_RESPONSES = {
     "symptoms": "The symptoms of breast cancer include a lump in the breast, unexplained pain, changes in breast size or shape, abnormal discharge from the nipple, redness or thickening of the skin on the breast, and sometimes pain in the armpit or near the collarbone. Not all symptoms indicate cancer, but it's important to get any concerning changes checked by a doctor.",
     "signs": "The signs of breast cancer can vary, but commonly include lumps in the breast or underarm, changes in the appearance or shape of the breast, or any unusual discharge from the nipple. Some individuals may experience pain or a change in the skin texture of the breast. Any changes should be reported to a healthcare provider.",
+    "difference": "The main difference between benign and malignant tumors is that benign tumors are non-cancerous and do not spread, while malignant tumors are cancerous and can invade surrounding tissues and spread to other areas of the body. Benign tumors may require monitoring, but malignant tumors usually require treatment.",
     "benign": "Benign tumors are non-cancerous growths that do not spread to other parts of the body. They may cause discomfort or grow in size, but they generally don't pose a life-threatening risk. However, monitoring by a healthcare provider may still be necessary.",
     "malignant": "Malignant tumors are cancerous and have the ability to invade nearby tissues and spread to other parts of the body through the bloodstream or lymphatic system. They often require medical treatments such as surgery, chemotherapy, or radiation therapy.",
     "diagnosis": "Breast cancer can be diagnosed using various methods, including mammograms, ultrasounds, MRIs, and biopsies. A biopsy, where a small sample of tissue is removed from the breast and examined, is the definitive test for diagnosing cancer.",
     "treatment": "Treatment options for breast cancer depend on the stage and type of cancer. Common treatments include surgery (lumpectomy or mastectomy), chemotherapy, radiation therapy, hormone therapy, and targeted therapies. Your doctor will create a treatment plan tailored to your situation.",
-    "difference benign malignant": "The main difference between benign and malignant tumors is that benign tumors are non-cancerous and do not spread, while malignant tumors are cancerous and can invade surrounding tissues and spread to other areas of the body. Benign tumors may require monitoring, but malignant tumors usually require treatment.",
     "risk factors": "Risk factors for breast cancer include a family history of the disease, age (especially over 50), genetic mutations (such as BRCA1 or BRCA2), hormone replacement therapy, obesity, lack of physical activity, and alcohol consumption. While some risk factors are controllable, others are not.",
     "prevention": "While there's no guaranteed way to prevent breast cancer, there are steps you can take to lower your risk, including maintaining a healthy weight, exercising regularly, limiting alcohol intake, avoiding tobacco, and undergoing regular breast cancer screenings as recommended by your healthcare provider.",
     "chemotherapy": "Chemotherapy is a treatment that uses drugs to destroy cancer cells or stop their growth. It can be used before surgery to shrink tumors, after surgery to eliminate remaining cancer cells, or for advanced cancer to control the spread. Side effects can include nausea, fatigue, and hair loss.",
@@ -77,31 +76,56 @@ CHATBOT_RESPONSES = {
 
 
 SYNONYMS = {
-    "symptoms": ["symptoms", "signs", "warning signs", "indicators"],
-    "diagnosis": ["diagnosis", "how is it diagnosed", "test for cancer", "how to detect", "identify cancer"],
-    "treatment": ["treatment", "cancer treatment", "therapy", "cancer therapy", "treatment options"],
-    "benign": ["benign", "non-cancerous", "harmless tumor"],
-    "malignant": ["malignant", "cancerous", "dangerous tumor", "spreading cancer"],
-    "risk factors": ["risk factors", "causes", "what increases risk", "what leads to cancer"],
-    "prevention": ["prevention", "how to prevent", "avoid cancer", "preventive measures"],
-    "chemotherapy": ["chemotherapy", "cancer drugs", "drug treatment", "chemo"],
-    "spread": ["spread", "how it spreads", "metastasis", "cancer spread"],
-    "mammogram": ["mammogram", "breast X-ray", "breast screening", "X-ray for cancer"],
-    "hereditary": ["hereditary", "genetic", "family history", "BRCA mutation"],
-    "self-exam": ["self-exam", "breast self-check", "breast check", "how to check"],
-    "stages": ["stages", "staging", "stages of cancer", "how cancer progresses"],
-    "lumpectomy": ["lumpectomy", "tumor removal", "breast conserving surgery"],
-    "mastectomy": ["mastectomy", "breast removal", "removal of breast"],
-    "side effects of chemotherapy": ["side effects", "chemotherapy side effects", "chemo side effects", "chemotherapy reactions"]
+    "symptoms": ["symptoms", "signs", "symptoms of breast cancer", "signs of breast cancer"],
+    "benign": ["benign tumor", "what is a benign tumor", "non-cancerous tumor", "benign"],
+    "malignant": ["malignant tumor", "what is a malignant tumor", "cancerous tumor", "malignant"],
+    "diagnosis": ["diagnosed", "how is breast cancer diagnosed", "breast cancer diagnosis", "how to diagnose breast cancer"],
+    "treatment": ["treatments available", "treatment for breast cancer", "cancer treatment", "available treatments"],
+    "difference": ["difference between benign and malignant tumors", "benign vs malignant", "difference"],
+    "risk factors": ["risk factors for breast cancer", "causes of breast cancer", "what increases risk"],
+    "prevention": ["how to prevent breast cancer", "breast cancer prevention", "prevent breast cancer", "prevention"],
+    "chemotherapy": ["what is chemotherapy", "cancer drugs", "chemo", "chemotherapy"],
+    "spread": ["how does breast cancer spread", "cancer spread", "breast cancer metastasis", "spread"],
+    "mammogram": ["what is a mammogram", "breast x-ray", "mammogram screening"],
+    "hereditary": ["is breast cancer hereditary", "hereditary breast cancer", "genetic breast cancer"],
+    "self-exam": ["how to perform a self-exam", "breast self-exam", "how to check for breast cancer", "self-exam"],
+    "stages": ["stages of breast cancer", "cancer staging", "what are the stages of breast cancer"],
+    "screening": ["screening", "screen", "how to screen", "screened"],
+    "lumpectomy": ["what is a lumpectomy", "lumpectomy surgery", "tumor removal"],
+    "mastectomy": ["what is a mastectomy", "breast removal surgery", "mastectomy procedure"],
+    "purpose of self-exam": ["purpose of a self-exam", "why perform a breast self-exam"],
+    "BRCA1 and BRCA2": ["what are BRCA1 and BRCA2", "BRCA mutation", "BRCA genes"],
+    "lifestyle changes": ["how can lifestyle changes prevent breast cancer", "lifestyle changes for breast cancer prevention"],
+    "side effects of chemotherapy": ["what are the side effects of chemotherapy", "chemotherapy side effects", "chemo reactions"],
+    "manage side effects chemotherapy": ["how to manage chemotherapy side effects", "chemo side effects management"],
+    "prepare for mammogram": ["how to prepare for a mammogram", "mammogram preparation"],
+    "reduce risk of breast cancer": ["how to reduce risk of breast cancer", "lower breast cancer risk"],
+    "how to diagnose": ["how to diagnose breast cancer", "breast cancer diagnosis methods", "diagnosing breast cancer"],
+    "get tested for breast cancer": ["how to get tested for breast cancer", "getting tested for breast cancer", "breast cancer test options"],
+    "inflammatory breast cancer": ["what is inflammatory breast cancer", "IBC", "inflammatory breast cancer signs"],
+    "dense breasts": ["what are dense breasts", "breast density", "dense breast tissue", "how dense breasts relate to cancer"]
 }
+
+
 
 def get_response(question):
     """
     Returns the most relevant response based on the user's question.
+    Ensures all possible questions are answered correctly.
     """
-    question = question.lower()
+    question = question.lower().strip()
+    
+    # Check for an exact match in possible questions
+    for possible_question in POSSIBLE_QUESTIONS.lower().split("\n"):
+        if possible_question.strip("- ").strip() == question:
+            for key, value in SYNONYMS.items():
+                if any(re.search(r"\b" + synonym + r"\b", question) for synonym in value):
+                    return CHATBOT_RESPONSES[key]
+
+    # General matching using synonyms
     for key, value in SYNONYMS.items():
         if any(re.search(r"\b" + synonym + r"\b", question) for synonym in value):
             return CHATBOT_RESPONSES[key]
+    
     return "Sorry, I don't have an answer for that. Please try asking another question."
 
