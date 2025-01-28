@@ -226,7 +226,7 @@ def main():
      with st.container():
         st.title('Breast Cancer Predictor')
           # Display Prediction
-        st.subheader('Cell cluster Prediction')
+        
         predictions(input_data)
      
      col1, col2, col3 = st.columns([2,2,1])  
