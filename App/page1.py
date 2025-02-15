@@ -9,7 +9,7 @@ from chatbot_database import CHATBOT_RESPONSES, POSSIBLE_QUESTIONS, USER_GUIDE_T
 
 # Function to clean the data
 def clean_data():
-    data = pd.read_csv(r'Data\data.csv')
+    data = pd.read_csv(r'Data/data.csv')
     # Drop unnecessary columns
     data = data.drop(['Unnamed: 32', 'id'], axis=1)
     data['diagnosis'] = data['diagnosis'].map({'M': 1, 'B': 0})
