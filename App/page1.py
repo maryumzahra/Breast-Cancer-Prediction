@@ -67,8 +67,8 @@ def sidebar():
 
 # Dynamic donut chart for predictions
 def dynamic_donut_chart(input_data):
-    model = pickle.load(open(r'C:\\Users\\Natasha\\Breast-Cancer-Prediction\\Model\\model.pkl', 'rb'))
-    scaler = pickle.load(open(r'C:\\Users\\Natasha\\Breast-Cancer-Prediction\\Model\\scaler.pkl', 'rb'))
+    model = pickle.load(open(r'Model/model.pkl', 'rb'))
+    scaler = pickle.load(open(r'Model/scaler.pkl', 'rb'))
 
     # Prepare the input data
     input_array = np.array(list(input_data.values())).reshape(1, -1)
@@ -161,8 +161,8 @@ def chart(input_data):  # Input data is a dictionary
 
 # Predictions function for the model
 def predictions(input_data):
-    model = pickle.load(open(r'C:\\Users\\Natasha\\Breast-Cancer-Prediction\\Model\\model.pkl', 'rb'))
-    scaler = pickle.load(open(r'C:\\Users\\Natasha\\Breast-Cancer-Prediction\\Model\\scaler.pkl', 'rb'))
+    model = pickle.load(open(r'Model/model.pkl', 'rb'))
+    scaler = pickle.load(open(r'Model/scaler.pkl', 'rb'))
 
     input_array = np.array(list(input_data.values())).reshape(1, -1)
     input_array_scaled = scaler.transform(input_array)
